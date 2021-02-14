@@ -11,7 +11,9 @@ export class GifsService {
     return [...this.history];
   }
 
-  searchGifs( query: string ){
+  searchGifs( query: string = '' ){
+
+    query = query.trim().toLocaleLowerCase();
 
     if ( !this.history.includes(query)) {
       this.history.unshift( query );
