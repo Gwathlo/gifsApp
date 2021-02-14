@@ -12,8 +12,12 @@ export class GifsService {
   }
 
   searchGifs( query: string ){
-    this.history.unshift( query );
 
+    if ( !this.history.includes(query)) {
+      this.history.unshift( query );
+    }
+    
+    this.history = this.history.splice(0,10);
     console.log(this.history);
     
   }
