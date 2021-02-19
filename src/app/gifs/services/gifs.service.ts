@@ -21,6 +21,7 @@ export class GifsService {
     //   this.history = JSON.parse( localStorage.getItem('history')!);
     // }
     this.history = JSON.parse( localStorage.getItem('history')!) || [];
+    this.results = JSON.parse( localStorage.getItem('lastSearch')!) || [];
     
 
   }
@@ -36,9 +37,10 @@ export class GifsService {
       localStorage.setItem('history', JSON.stringify(this.history));
     }
     
-    this.http.get<SearchGifsResponse>(`https://api.giphy.com/v1/gifs/search?api_key=obHYhAIcvnaMu1uMUsJd6FW8xaJsV8qW&limit=10&q=${ query }`)
+    this.http.get<SearchGifsResponse>(`https://api.giphy.com/v1/gifs/search?api_key=obHYhAIcvnaMu1uMUsJd6FW8xaJsV8qW&limit=20&q=${ query }`)
       .subscribe( (resp) => {
         this.results = resp.data;
+        localStorage.setItem('lastSearch', JSON.stringify(this.results));
       });
     
   }
